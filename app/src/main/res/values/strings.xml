@@ -3,6 +3,12 @@
     <string name="tab_neighbour_title">My neighbours</string>
     <string name="tab_favorites_title">Favorites</string>
     <string name="title_activity_neighbour_profile">NeighbourProfile</string>
+    <string name="neighbour_name">Caroline Lien</string>
+    <string name="local">Saint pierre du mont à 5km (lien?)</string>
+    <string name="phone">+33 6 86 57 90 14 (lien ?)</string>
+    <string name="net">www.facebook.fr/caroline (lien?)</string>
+    <string name="about_me">A propos de moi (lien?)</string>
+    <string name="content">Bla bla bla (lien?)</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
