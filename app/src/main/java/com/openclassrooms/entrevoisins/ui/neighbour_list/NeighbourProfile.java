@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
@@ -25,7 +27,6 @@ public class NeighbourProfile extends AppCompatActivity {
     private String neighbourName;
     private String  titleName;
     private  String picture;
-    //private String local;
 
 
     @Override
@@ -35,7 +36,7 @@ public class NeighbourProfile extends AppCompatActivity {
 
         Toolbar mtitleName = (Toolbar) findViewById(R.id.toolbar);
         TextView mNeighbourName = (TextView) findViewById(R.id.neighboursName);
-        mNeighbourPicture = (ImageView) findViewById(R.id.neighboursPicture);
+        ImageView mNeighbourPicture = (ImageView) findViewById(R.id.neighboursPicture);
 
 
         Intent mIntent = getIntent();
@@ -47,7 +48,9 @@ public class NeighbourProfile extends AppCompatActivity {
 
         mNeighbourName.setText(neighbourName);
         mtitleName.setTitle(titleName);
-        //mNeighbourPicture.setImageURI(picture);
+        Glide.with(this)
+                .load(picture)
+                .into(mNeighbourPicture);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
