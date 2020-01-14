@@ -29,7 +29,7 @@
                 android:layout_height="350dp"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop"
-                android:src="@drawable/blason"
+                android:src="@mipmap/ic_launcher_foreground"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar

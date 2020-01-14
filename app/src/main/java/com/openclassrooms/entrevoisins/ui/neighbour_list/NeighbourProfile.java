@@ -26,7 +26,7 @@ public class NeighbourProfile extends AppCompatActivity {
     private TextView mLocal;
     private String neighbourName;
     private String  titleName;
-    private  String picture;
+    private  String avatarPicture;
 
 
     @Override
@@ -44,12 +44,12 @@ public class NeighbourProfile extends AppCompatActivity {
 
         titleName = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName();
         neighbourName = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName();
-        picture = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getAvatarUrl();
+        avatarPicture = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getAvatarUrl();
 
         mNeighbourName.setText(neighbourName);
         mtitleName.setTitle(titleName);
         Glide.with(this)
-                .load(picture)
+                .load(avatarPicture)
                 .into(mNeighbourPicture);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
