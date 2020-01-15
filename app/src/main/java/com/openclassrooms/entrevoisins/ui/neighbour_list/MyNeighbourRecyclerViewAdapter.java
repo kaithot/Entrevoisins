@@ -54,13 +54,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.mNeighbourAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),NeighbourProfile.class);
+                Intent intent = new Intent(v.getContext(), NeighbourProfile.class);
                 intent.putExtra("PROFILE", neighbour.getId());
-
-                ContextCompat.startActivity(v.getContext(),intent,null);
+                ContextCompat.startActivity(v.getContext(), intent, null);
             }
         });
     }

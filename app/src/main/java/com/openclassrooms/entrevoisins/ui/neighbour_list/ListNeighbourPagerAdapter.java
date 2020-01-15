@@ -3,12 +3,17 @@ package com.openclassrooms.entrevoisins.ui.neighbour_list;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 
-public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
+public class ListNeighbourPagerAdapter extends FragmentStatePagerAdapter {
 
-    public ListNeighbourPagerAdapter(FragmentManager fm) {
+    int tabCount;
+
+    public ListNeighbourPagerAdapter(FragmentManager fm, int tabCount) { // ajout int tabcount en 2ème parametre
         super(fm);
+
+        this.tabCount = tabCount;
     }
 
     /**
@@ -17,8 +22,19 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      * @return
      */
     @Override
-    public Fragment getItem(int position) {
-        return NeighbourFragment.newInstance();
+    public Fragment getItem(int position) { // switch afin de basculer entre les 2 activités
+
+        switch (position) {
+            case 0:
+                return NeighbourFragment.newInstance();
+
+            case 1:
+                ListFavorites listFavorites = new ListFavorites();
+                return listFavorites;
+
+                default:
+                    return null;
+        }
     }
 
     /**
@@ -27,6 +43,6 @@ public class ListNeighbourPagerAdapter extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        return 1;
+        return tabCount;
     }
 }
