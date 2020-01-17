@@ -2,4 +2,12 @@
     <string name="app_name">Entrevoisins</string>
     <string name="tab_neighbour_title">My neighbours</string>
     <string name="tab_favorites_title">Favorites</string>
+    <string name="title_activity_neighbour_profile">Lien</string>
+    <string name="neighbour_name">Lien</string>
+    <string name="local">A venir</string>
+    <string name="phone">A venir</string>
+    <string name="net">A venir</string>
+    <string name="about_me">A propos de moi</string>
+    <string name="content">A venir</string>
+    <string name="action_settings">Settings</string>
 </resources>
