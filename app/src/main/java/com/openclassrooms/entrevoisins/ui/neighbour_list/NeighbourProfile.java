@@ -25,8 +25,9 @@ public class NeighbourProfile extends AppCompatActivity {
     private ImageView mNeighbourPicture;
     private TextView mLocal;
     private String neighbourName;
-    private String  titleName;
-    private  String avatarPicture;
+    private String titleName;
+    private String avatarPicture;
+    private int mCount = 1;
 
 
     @Override
@@ -34,35 +35,48 @@ public class NeighbourProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neighbour_profile);
 
-        Toolbar mtitleName = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar mTitleName = (Toolbar) findViewById(R.id.toolbar);
         TextView mNeighbourName = (TextView) findViewById(R.id.neighboursName);
         ImageView mNeighbourPicture = (ImageView) findViewById(R.id.neighboursPicture);
+        FloatingActionButton mFavorite = (FloatingActionButton) findViewById(R.id.fab);
 
 
         Intent mIntent = getIntent();
-        int id = (mIntent.getIntExtra("PROFILE", -1))-1;
+        int id = (mIntent.getIntExtra("PROFILE", -1)) - 1;
 
         titleName = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName();
         neighbourName = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName();
         avatarPicture = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getAvatarUrl();
 
         mNeighbourName.setText(neighbourName);
-        mtitleName.setTitle(titleName);
+        mTitleName.setTitle(titleName);
         Glide.with(this)
                 .load(avatarPicture)
                 .into(mNeighbourPicture);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                int result = (mCount < 1) ? mCount++ : mCount--; // if for add 1 or remove 1
+
+                Snackbar.make(view, Integer.toString(result), Snackbar.LENGTH_LONG)
+                        .setAction("addFavorite", null).show();
+
+                if (result == 0) {
+                    mFavorite.setImageResource(R.drawable.ic_staroff);
+
+                } else {
+                    mFavorite.setImageResource(R.drawable.ic_staron);
+
+                }
+
             }
         });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

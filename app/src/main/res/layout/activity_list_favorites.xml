@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".ui.neighbour_list.ListFavorites">
 
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.openclassrooms.entrevoisins.ui.neighbour_list.NeighbourFragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

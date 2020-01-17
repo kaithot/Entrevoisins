@@ -52,11 +52,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
         android:backgroundTint="#FFFFFF"
+        android:src="@drawable/ic_staroff"
         app:backgroundTint="#00FCF9F9"
         app:fabSize="auto"
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
-        app:rippleColor="#1f000000"
-        app:srcCompat="@drawable/ic_action_name" />
+        app:rippleColor="#1f000000">
+
+    </android.support.design.widget.FloatingActionButton>
 
 </android.support.design.widget.CoordinatorLayout>

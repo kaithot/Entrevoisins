@@ -42,6 +42,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/localPic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -70,6 +71,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/phonePic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -98,6 +100,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/webPic"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
