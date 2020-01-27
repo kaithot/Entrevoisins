@@ -26,11 +26,10 @@ public class ListNeighbourPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return NeighbourFragment.newInstance();
+                return NeighbourFragment.newInstance(0);
 
             case 1:
-                ListFavorites listFavorites = new ListFavorites();
-                return listFavorites;
+                return NeighbourFragment.newInstance(1);
 
                 default:
                     return null;

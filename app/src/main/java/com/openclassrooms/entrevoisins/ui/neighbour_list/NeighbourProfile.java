@@ -27,8 +27,6 @@ public class NeighbourProfile extends AppCompatActivity {
     private String neighbourName;
     private String titleName;
     private String avatarPicture;
-    private int mCount = 1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,28 +46,32 @@ public class NeighbourProfile extends AppCompatActivity {
         neighbourName = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName();
         avatarPicture = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getAvatarUrl();
 
+
         mNeighbourName.setText(neighbourName);
         mTitleName.setTitle(titleName);
         Glide.with(this)
                 .load(avatarPicture)
                 .into(mNeighbourPicture);
 
+        boolean fav = DummyNeighbourGenerator.generateFavoritesNeighbours().contains(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id));
+        if (fav) {
+            mFavorite.setImageResource(R.drawable.ic_staron);
+        } else {
+            mFavorite.setImageResource(R.drawable.ic_staroff);
+        }
 
         mFavorite.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
 
-                int result = (mCount < 1) ? mCount++ : mCount--; // if for add 1 or remove 1
-
-                Snackbar.make(view, Integer.toString(result), Snackbar.LENGTH_LONG)
-                        .setAction("addFavorite", null).show();
-
-                if (result == 0) {
+                if (fav) {
+                    DummyNeighbourGenerator.favoritesList.remove(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id));
                     mFavorite.setImageResource(R.drawable.ic_staroff);
-
                 } else {
-                    mFavorite.setImageResource(R.drawable.ic_staron);
-
+                    DummyNeighbourGenerator.favoritesList.add(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id));
+                   mFavorite.setImageResource(R.drawable.ic_staron);
                 }
 
             }
