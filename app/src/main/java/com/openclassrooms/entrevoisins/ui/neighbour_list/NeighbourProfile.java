@@ -14,12 +14,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import java.util.List;
 
 public class NeighbourProfile extends AppCompatActivity {
+
+    private NeighbourApiService mApiService;
 
     private TextView mNeighbourName;
     private ImageView mNeighbourPicture;
@@ -32,6 +36,7 @@ public class NeighbourProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neighbour_profile);
+        mApiService = DI.getNeighbourApiService();
 
         Toolbar mTitleName = (Toolbar) findViewById(R.id.toolbar);
         TextView mNeighbourName = (TextView) findViewById(R.id.neighboursName);
@@ -42,9 +47,9 @@ public class NeighbourProfile extends AppCompatActivity {
         Intent mIntent = getIntent();
         int id = (mIntent.getIntExtra("PROFILE", -1)) - 1;
 
-        titleName = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName();
-        neighbourName = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName();
-        avatarPicture = DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getAvatarUrl();
+        titleName = mApiService.getNeighbours().get(id).getName();
+        neighbourName = mApiService.getNeighbours().get(id).getName();
+        avatarPicture = mApiService.getNeighbours().get(id).getAvatarUrl();
 
 
         mNeighbourName.setText(neighbourName);
@@ -53,7 +58,7 @@ public class NeighbourProfile extends AppCompatActivity {
                 .load(avatarPicture)
                 .into(mNeighbourPicture);
 
-        boolean fav = DummyNeighbourGenerator.generateFavoritesNeighbours().contains(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id));
+        boolean fav = mApiService.getFavoritesNeighbours().contains(mApiService.getNeighbours().get(id));
         if (fav) {
             mFavorite.setImageResource(R.drawable.ic_staron);
         } else {
@@ -67,10 +72,10 @@ public class NeighbourProfile extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (fav) {
-                    DummyNeighbourGenerator.favoritesList.remove(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id));
+                    mApiService.deleteFavorite(mApiService.getNeighbours().get(id));
                     mFavorite.setImageResource(R.drawable.ic_staroff);
                 } else {
-                    DummyNeighbourGenerator.favoritesList.add(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id));
+                    mApiService.addFavorite(mApiService.getNeighbours().get(id));
                    mFavorite.setImageResource(R.drawable.ic_staron);
                 }
 

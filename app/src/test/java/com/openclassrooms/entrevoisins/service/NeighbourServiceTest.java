@@ -40,4 +40,16 @@ public class NeighbourServiceTest {
         service.deleteNeighbour(neighbourToDelete);
         assertFalse(service.getNeighbours().contains(neighbourToDelete));
     }
+
+
+    @Test
+    public void setNeighbourFavorite(){
+
+        Neighbour favoriteToAdd = service.getNeighbours().get(1);
+        service.getFavoritesNeighbours().add(favoriteToAdd);
+
+        Neighbour favoriteToDelete = service.getNeighbours().get(0); // TODO add a neighbour from DUMMY_NEIGHBOURS, not FavoritesNeighbours it's ok ?
+        service.deleteNeighbour(favoriteToDelete);
+        assertFalse(service.getFavoritesNeighbours().contains(favoriteToDelete));
+    }
 }

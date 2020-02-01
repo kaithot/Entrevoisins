@@ -29,7 +29,6 @@ public class NeighbourFragment extends Fragment {
     private NeighbourApiService mApiService;
     private List<Neighbour> mNeighbours;
     private RecyclerView mRecyclerView;
-    private Button visibleDeletedBtn;
 
 
     /**
@@ -72,11 +71,12 @@ public class NeighbourFragment extends Fragment {
 
         int index = getArguments().getInt("index", 0);
         if (index==0) {mNeighbours = mApiService.getNeighbours();}
-        else {mNeighbours = mApiService.getFavoritesNeighbours();
-             }
+        else {mNeighbours = mApiService.getFavoritesNeighbours();}
 
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, index));
     }
+
+
 
     @Override
     public void onStart() {
