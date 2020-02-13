@@ -20,7 +20,7 @@ public class RecyclerViewItemCountAssertion implements ViewAssertion {
             return new RecyclerViewItemCountAssertion(matcher);
         }
 
-        private RecyclerViewItemCountAssertion(Matcher<Integer> matcher) {
+        public RecyclerViewItemCountAssertion(Matcher<Integer> matcher) {
             this.matcher = matcher;
         }
 

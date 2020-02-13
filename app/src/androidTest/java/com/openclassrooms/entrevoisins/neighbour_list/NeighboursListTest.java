@@ -7,7 +7,10 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.openclassrooms.entrevoisins.R;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 import com.openclassrooms.entrevoisins.ui.neighbour_list.ListNeighbourActivity;
+import com.openclassrooms.entrevoisins.utils.SelectViewFavorite;
 import com.openclassrooms.entrevoisins.utils.DeleteViewAction;
 
 import org.junit.Before;
@@ -15,20 +18,20 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
-import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isSelected;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParent;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.openclassrooms.entrevoisins.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsNull.notNullValue;
+
 
 /**
  * Test class for list of neighbours
@@ -41,10 +44,12 @@ public class NeighboursListTest {
     private static int ITEMS_COUNT_FAV = 0;
 
     private ListNeighbourActivity mActivity;
+    private NeighbourApiService mApiService;
 
     @Rule
     public ActivityTestRule<ListNeighbourActivity> mActivityRule =
             new ActivityTestRule(ListNeighbourActivity.class);
+
 
     @Before
     public void setUp() {
@@ -80,7 +85,7 @@ public class NeighboursListTest {
         // Given : We remove the element at position 2
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT));
         // When perform a click on a delete icon
-        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, new DeleteViewAction()));
         //Then : the number of element is 11
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT - 1));
     }
@@ -88,17 +93,31 @@ public class NeighboursListTest {
 
     @Test
     public void myNeighboursList_shouldShowProfile(){
-
-        onView (allOf(withId(R.id.item_list_avatar),isClickable()));
-        onView (allOf(withId(R.id.list_neighbours),isDisplayed())).check(matches(isDisplayed()));// TODO à revoir
+        // When perform a click on a avatar icon show profile
+        onView (allOf(withId (R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(1,new SelectViewFavorite()));
+        onView (allOf(withId (R.id.neighboursPicture))).check(matches(ViewMatchers.isDisplayed()));
     }
 
     @Test
     public void myNeighboursList_onProfile_shouldShowRightName() {
+        //onView(allOf(withId(R.id.neighboursName),isDisplayed())).check(matches(withText(mApiService.getNeighbours().get(id).getName()))); TODO à voir avec Wilfried
+        int id = 1;
+        onView (allOf(withId (R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(id,new SelectViewFavorite()));
+        onView(allOf(withId(R.id.neighboursName),isDisplayed())).check(matches(withText(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName())));
+
 
 }
     @Test
     public void myNeighboursList_shouldOnlyShowFavs() {
+
+        onView (allOf(withContentDescription("Favorites"),isDisplayed())).perform(click());
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT_FAV ));
+        onView (allOf(withContentDescription("My neighbours"),isDisplayed())).perform(click());
+        onView (allOf(withId (R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(2,new SelectViewFavorite()));
+        onView (allOf(withId (R.id.fab),isDisplayed())).perform(click());
+        onView(allOf(withContentDescription("Navigate up"),isDisplayed())).perform(click());
+        onView (allOf(withContentDescription("Favorites"),isDisplayed())).perform(click());
+        onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT_FAV + 1));
 
 
 
