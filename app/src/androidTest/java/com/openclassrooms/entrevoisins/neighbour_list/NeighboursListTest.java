@@ -120,12 +120,6 @@ public class NeighboursListTest {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT_FAV + 1));
 
 
-
-
     }
-
-
-
-
 
 }

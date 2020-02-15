@@ -44,6 +44,10 @@ public class NeighbourProfile extends AppCompatActivity {
         FloatingActionButton mFavorite = (FloatingActionButton) findViewById(R.id.fab);
 
 
+        /**
+         * recovery neighbour's id from MyNeighbourRecyclerViewAdapter
+         */
+
         Intent mIntent = getIntent();
         int id = (mIntent.getIntExtra("PROFILE", -1)) - 1;
 
