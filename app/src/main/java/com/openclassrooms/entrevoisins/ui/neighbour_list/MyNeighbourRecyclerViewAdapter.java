@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -27,6 +28,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
 
     private final List<Neighbour> mNeighbours;
     private final int mIndex;
+    private NeighbourApiService mApiService;
 
     public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, int index) {
         mNeighbours = items;
@@ -49,6 +51,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
+        // TODO 9 if/else for know if le delete button is visible or not.
         if (mIndex == 1){
             holder.mDeleteButton.setVisibility(View.INVISIBLE);
         }else{
@@ -60,6 +63,7 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             }
         });}
 
+        //TODO 2 When click on item, neighbour's Id go to NeighbourProfile.class
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

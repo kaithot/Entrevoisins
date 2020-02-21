@@ -10,9 +10,9 @@ public class ListNeighbourPagerAdapter extends FragmentStatePagerAdapter {
 
     int tabCount;
 
-    public ListNeighbourPagerAdapter(FragmentManager fm, int tabCount) { // ajout int tabcount en 2ème parametre
+    // TODO 6 add int tabCount to the 2ème setting, add a switch in the getItem method and add variable (tabCount) into getCount method
+    public ListNeighbourPagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
-
         this.tabCount = tabCount;
     }
 
@@ -22,7 +22,7 @@ public class ListNeighbourPagerAdapter extends FragmentStatePagerAdapter {
      * @return
      */
     @Override
-    public Fragment getItem(int position) { // switch afin de basculer entre les 2 activités
+    public Fragment getItem(int position) {
 
         switch (position) {
             case 0:

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#E7E7E7"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.neighbour_list.NeighbourProfile"
     tools:showIn="@layout/activity_neighbour_profile">
@@ -13,14 +13,13 @@
         android:id="@+id/Global"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/Box1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
             android:background="#FFFFFF"
             android:orientation="vertical">
 
@@ -34,6 +33,13 @@
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BBB9B9"
+                android:paddingTop="1dp"></LinearLayout>
 
             <LinearLayout
                 android:id="@+id/local"
@@ -127,7 +133,7 @@
             android:id="@+id/box2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginTop="10dp"
             android:background="#FFFFFF"
             android:orientation="vertical">
 
@@ -142,8 +148,15 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <LinearLayout
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BBB9B9"
+                android:paddingTop="1dp"></LinearLayout>
+
             <TextView
-                android:id="@+id/content"
+                android:id="@+id/aboutMe"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"

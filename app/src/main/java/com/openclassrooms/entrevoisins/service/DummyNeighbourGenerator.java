@@ -27,10 +27,10 @@ public abstract class DummyNeighbourGenerator {
         return new ArrayList<>(DUMMY_NEIGHBOURS);
     }
 
+    // TODO 4 creation favorites's list
+
     public static List<Neighbour> favoritesList = new ArrayList<Neighbour>();
 
-    public static List<Neighbour> generateFavoritesNeighbours() {
-        return favoritesList;
-    }
+    static List<Neighbour> generateFavoritesNeighbours() {return favoritesList;}
 }
 

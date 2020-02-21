@@ -1,3 +1,4 @@
+
 package com.openclassrooms.entrevoisins.model;
 
 import java.util.Objects;

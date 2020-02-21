@@ -38,6 +38,7 @@ public class NeighbourFragment extends Fragment {
     public static NeighbourFragment newInstance(int index) {
         NeighbourFragment fragment = new NeighbourFragment();
 
+        // TODO 7 add index input as an argument
         // Supply index input as an argument.
         Bundle args = new Bundle();
         args.putInt("index", index);
@@ -64,8 +65,8 @@ public class NeighbourFragment extends Fragment {
         return view;
     }
 
-    /**
-     * Init the List of neighbours getFavoritesNeighbours()
+    /** TODO 8 with this index choice between List of neighbours or List of favorites
+     * Init the List of neighbours or List of favorites
      */
     private void initList() {
 
@@ -75,8 +76,6 @@ public class NeighbourFragment extends Fragment {
 
         mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, index));
     }
-
-
 
     @Override
     public void onStart() {
