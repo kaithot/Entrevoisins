@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 public class NeighbourProfile extends AppCompatActivity {
@@ -36,17 +37,16 @@ public class NeighbourProfile extends AppCompatActivity {
         ImageView mNeighbourPicture = (ImageView) findViewById(R.id.neighboursPicture);
         FloatingActionButton mFavorite = (FloatingActionButton) findViewById(R.id.fab);
 
-        /** TODO 3 recovery neighbour's id from MyNeighbourRecyclerViewAdapter
-         * recovery neighbour's id from MyNeighbourRecyclerViewAdapter
+        /** TODO 3 recovery neighbour's item from MyNeighbourRecyclerViewAdapter with "SerializableExtra"
+         * recovery neighbour's item from MyNeighbourRecyclerViewAdapter
          */
 
         Intent mIntent = getIntent();
-        int id = mIntent.getIntExtra("PROFILE", -1)-1;
-        int index = mApiService.getNeighbours().indexOf(mApiService.getNeighbours().get(id)); // don't work !!!
+        Neighbour neighbour = (Neighbour) mIntent.getSerializableExtra("PROFILE");
 
-        titleName = mApiService.getNeighbours().get(index).getName();
-        neighbourName = mApiService.getNeighbours().get(index).getName();
-        avatarPicture = mApiService.getNeighbours().get(index).getAvatarUrl();
+        titleName = neighbour.getName();
+        neighbourName = neighbour.getName();
+        avatarPicture = neighbour.getAvatarUrl();
 
         mNeighbourName.setText(neighbourName);
         mTitleName.setTitle(titleName);
@@ -57,7 +57,7 @@ public class NeighbourProfile extends AppCompatActivity {
         /** TODO 5 check than the neighbour selected is or not in the favorites's list for the good icon
          *  check than the neighbour selected is or not in the favorites's list for the good icon
          */
-       boolean fav = mApiService.getFavoritesNeighbours().contains(mApiService.getNeighbours().get(index));
+       boolean fav = mApiService.getFavoritesNeighbours().contains(neighbour);
        if (fav) {
            mFavorite.setImageResource(R.drawable.ic_staron);
        } else {
@@ -72,7 +72,7 @@ public class NeighbourProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                boolean fav = mApiService.getFavoritesNeighbours().contains(mApiService.getNeighbours().get(index));
+                boolean fav = mApiService.getFavoritesNeighbours().contains(neighbour);
                 if (fav) {
                     mFavorite.setImageResource(R.drawable.ic_staron);
                 } else {
@@ -80,10 +80,10 @@ public class NeighbourProfile extends AppCompatActivity {
                 }
 
                 if (fav) {
-                    mApiService.deleteFavorite(mApiService.getNeighbours().get(index));
+                    mApiService.deleteFavorite(neighbour);
                     mFavorite.setImageResource(R.drawable.ic_staroff);
                 } else {
-                    mApiService.addFavorite(mApiService.getNeighbours().get(index));
+                    mApiService.addFavorite(neighbour);
                    mFavorite.setImageResource(R.drawable.ic_staron);
                 }
 

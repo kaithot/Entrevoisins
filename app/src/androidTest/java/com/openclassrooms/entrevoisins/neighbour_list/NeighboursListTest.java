@@ -80,32 +80,48 @@ public class NeighboursListTest {
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT - 1));
     }
 
-
+    /**
+     * When we perform a click on an item, show profile
+     */
     @Test
     public void myNeighboursList_shouldShowProfile(){
-        // When perform a click on a avatar icon show profile
         onView (allOf(withId (R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(1,new SelectViewFavorite()));
         onView (allOf(withId (R.id.neighboursPicture))).check(matches(ViewMatchers.isDisplayed()));
     }
 
+    /**
+     * When we perform a click on an item, show the good profile
+     */
     @Test
     public void myNeighboursList_onProfile_shouldShowRightName() {
         int id = 1;
-        onView (allOf(withId (R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(id,new SelectViewFavorite()));
-        onView(allOf(withId(R.id.neighboursName),isDisplayed())).check(matches(withText(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName())));
+        onView (allOf(withId (R.id.list_neighbours),
+                isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(id,new SelectViewFavorite()));
+        onView(allOf(withId(R.id.neighboursName),
+                isDisplayed())).check(matches(withText(DummyNeighbourGenerator.DUMMY_NEIGHBOURS.get(id).getName())));
 
 
-}
+    }
+
+    /**
+     * When we perform a click on favorites's tab, show only Favs
+     */
     @Test
     public void myNeighboursList_shouldOnlyShowFavs() {
-
+        // selected favorites's tab
         onView (allOf(withContentDescription("Favorites"),isDisplayed())).perform(click());
+        // verified favorites = 0
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT_FAV ));
+        // selected Neighbours's tab
         onView (allOf(withContentDescription("My neighbours"),isDisplayed())).perform(click());
-        onView (allOf(withId (R.id.list_neighbours),isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(2,new SelectViewFavorite()));
+        //selected neighbour at position 2
+        onView (allOf(withId (R.id.list_neighbours),
+                isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(2,new SelectViewFavorite()));
         onView (allOf(withId (R.id.fab),isDisplayed())).perform(click());
+        // selected favorites's tab
         onView(allOf(withContentDescription("Navigate up"),isDisplayed())).perform(click());
         onView (allOf(withContentDescription("Favorites"),isDisplayed())).perform(click());
+        // the number of element is 1
         onView(allOf(withId(R.id.list_neighbours),isDisplayed())).check(withItemCount(ITEMS_COUNT_FAV + 1));
 
     }

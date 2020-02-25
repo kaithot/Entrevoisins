@@ -63,12 +63,12 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
             }
         });}
 
-        //TODO 2 When click on item, neighbour's Id go to NeighbourProfile.class
+        //TODO 2 When click on item, neighbour's Item go to NeighbourProfile.class
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), NeighbourProfile.class);
-                intent.putExtra("PROFILE", neighbour.getId());
+                intent.putExtra("PROFILE", neighbour);
                 ContextCompat.startActivity(v.getContext(), intent, null);
             }
         });

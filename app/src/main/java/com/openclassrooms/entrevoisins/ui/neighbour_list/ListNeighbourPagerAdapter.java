@@ -8,10 +8,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class ListNeighbourPagerAdapter extends FragmentStatePagerAdapter {
 
-    int tabCount;
+    private int tabCount;
 
     // TODO 6 add int tabCount to the 2ème setting, add a switch in the getItem method and add variable (tabCount) into getCount method
-    public ListNeighbourPagerAdapter(FragmentManager fm, int tabCount) {
+    ListNeighbourPagerAdapter(FragmentManager fm, int tabCount) {
         super(fm);
         this.tabCount = tabCount;
     }

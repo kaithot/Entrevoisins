@@ -1,12 +1,13 @@
 
 package com.openclassrooms.entrevoisins.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Model object representing a Neighbour
+ * Model object representing a Neighbour ; implements also Serializable
  */
-public class Neighbour {
+public class Neighbour implements Serializable {
 
     /** Identifier */
     private Integer id;
