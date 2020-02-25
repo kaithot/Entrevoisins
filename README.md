@@ -45,4 +45,4 @@ To download the project in your file selected :
 
 
 
-Ce dépôt contient une mini-application pour le P3 du parcours **Grande École du Numérique** du site Openclassrooms.
+This deposit contains a mini-application for P3 of the **Grande École du Numérique** course on the Openclassrooms site.
