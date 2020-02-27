@@ -9,11 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.DummyNeighbourGenerator;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,8 +35,14 @@ public class NeighbourFragment extends Fragment {
      * Create and return a new instance
      * @return @{@link NeighbourFragment}
      */
-    public static NeighbourFragment newInstance() {
+    public static NeighbourFragment newInstance(int index) {
         NeighbourFragment fragment = new NeighbourFragment();
+
+        // TODO 7 add index input as an argument
+        // Supply index input as an argument.
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -42,6 +50,7 @@ public class NeighbourFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApiService = DI.getNeighbourApiService();
+
     }
 
     @Override
@@ -56,12 +65,16 @@ public class NeighbourFragment extends Fragment {
         return view;
     }
 
-    /**
-     * Init the List of neighbours
+    /** TODO 8 with this index choice between List of neighbours or List of favorites
+     * Init the List of neighbours or List of favorites
      */
     private void initList() {
-        mNeighbours = mApiService.getNeighbours();
-        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours));
+
+        int index = getArguments().getInt("index", 0);
+        if (index==0) {mNeighbours = mApiService.getNeighbours();}
+        else {mNeighbours = mApiService.getFavoritesNeighbours();}
+
+        mRecyclerView.setAdapter(new MyNeighbourRecyclerViewAdapter(mNeighbours, index));
     }
 
     @Override

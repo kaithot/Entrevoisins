@@ -36,7 +36,7 @@ public class ListNeighbourActivity extends AppCompatActivity implements TabLayou
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
-        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());// ajout parametre int dans class ListNeighbourPagerAdapter
+        mPagerAdapter = new ListNeighbourPagerAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));

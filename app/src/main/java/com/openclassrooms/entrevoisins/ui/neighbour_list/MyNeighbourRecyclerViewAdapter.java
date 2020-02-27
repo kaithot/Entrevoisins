@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
+import com.openclassrooms.entrevoisins.service.NeighbourApiService;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -26,9 +27,12 @@ import butterknife.ButterKnife;
 public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeighbourRecyclerViewAdapter.ViewHolder> {
 
     private final List<Neighbour> mNeighbours;
+    private final int mIndex;
+    private NeighbourApiService mApiService;
 
-    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items) {
+    public MyNeighbourRecyclerViewAdapter(List<Neighbour> items, int index) {
         mNeighbours = items;
+        mIndex = index;
     }
 
     @Override
@@ -47,21 +51,28 @@ public class MyNeighbourRecyclerViewAdapter extends RecyclerView.Adapter<MyNeigh
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mNeighbourAvatar);
 
+        // TODO 9 if/else for know if le delete button is visible or not.
+        if (mIndex == 1){
+            holder.mDeleteButton.setVisibility(View.INVISIBLE);
+        }else{
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.findViewById(R.id.item_list_delete_button).setVisibility(View.INVISIBLE);
                 EventBus.getDefault().post(new DeleteNeighbourEvent(neighbour));
             }
-        });
+        });}
 
-        holder.mNeighbourAvatar.setOnClickListener(new View.OnClickListener() {
+        //TODO 2 When click on item, neighbour's Item go to NeighbourProfile.class
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), NeighbourProfile.class);
-                intent.putExtra("PROFILE", neighbour.getId());
+                intent.putExtra("PROFILE", neighbour);
                 ContextCompat.startActivity(v.getContext(), intent, null);
             }
         });
+
     }
 
     @Override
