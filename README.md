@@ -39,7 +39,7 @@ The **Entrevoisins** application allows people in the same district to provide t
 
 To download the project in your file selected :
 1. position yourself in the project directory **"my_project"** and enter: $ git init
-2. $ git clone https://github.com/Deyine/OpenClassrooms/tree/master/Android/Entrevoisins
+2. $ git clone https://github.com/kaithot/Entrevoisins.git
 
 
 
