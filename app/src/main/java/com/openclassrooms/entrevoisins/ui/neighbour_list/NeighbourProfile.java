@@ -12,8 +12,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.openclassrooms.entrevoisins.R;
 import com.openclassrooms.entrevoisins.di.DI;
+import com.openclassrooms.entrevoisins.events.DeleteNeighbourEvent;
 import com.openclassrooms.entrevoisins.model.Neighbour;
 import com.openclassrooms.entrevoisins.service.NeighbourApiService;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class NeighbourProfile extends AppCompatActivity {
 
@@ -95,5 +98,8 @@ public class NeighbourProfile extends AppCompatActivity {
        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
        setSupportActionBar(toolbar);
        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
+
+
 }
