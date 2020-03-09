@@ -77,12 +77,6 @@ public class NeighbourProfile extends AppCompatActivity {
 
                 boolean fav = mApiService.getFavoritesNeighbours().contains(neighbour);
                 if (fav) {
-                    mFavorite.setImageResource(R.drawable.ic_staron);
-                } else {
-                    mFavorite.setImageResource(R.drawable.ic_staroff);
-                }
-
-                if (fav) {
                     mApiService.deleteFavorite(neighbour);
                     mFavorite.setImageResource(R.drawable.ic_staroff);
                 } else {
