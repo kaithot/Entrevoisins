@@ -48,7 +48,7 @@ public class NeighbourServiceTest {
     public void addNeighbourFavorite() {
 
         Neighbour favoriteToAdd = service.getNeighbours().get(1);
-        service.getFavoritesNeighbours().add(favoriteToAdd);
+        service.addFavorite(favoriteToAdd);
         assertTrue(service.getFavoritesNeighbours().contains(favoriteToAdd));
     }
 
